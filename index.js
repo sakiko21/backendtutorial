@@ -1,3 +1,4 @@
+// Purpose: Entry point for the application
 import express from "express";
 
 const app = express();
