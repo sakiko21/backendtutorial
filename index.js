@@ -92,6 +92,42 @@ app.get("/product/:id", async (req, res) => {
     return res.status(200).send(product);
 });
 
+//会員情報を更新するAPI
+app.put("/users/update", async (req, res) => {
+    const {name, email, password, id} = req.body;
+    console.log({name, email, password, id});
+    const user = await TeckGeekDB.updateUser(name, email, password, id);
+    console.log({user});
+    if (user.error){
+        return res.status(500).send(user.error);
+    }
+    return res.status(200).send(user);
+    
+});
+//商品情報を更新するAPI
+app.put("/product/update", async (req, res) => {
+    const {title, description, price, imagePath, id} = req.body;
+    console.log({title, description, price, imagePath, id});
+    const product = await TeckGeekDB.updateProduct(title, description, price, imagePath, id);
+    console.log({product});
+    if (product.error){
+        return res.status(500).send(product.error);
+    }
+    return res.status(200).send(product);
+    
+});
+//商品を購入するAPI
+app.post("/purchase/create", async (req, res) => {
+    const {user_id, amount, product_ids} = req.body;
+    console.log({user_id, amount, product_ids});
+    const purchase = await TeckGeekDB.createPurchase(user_id, amount, product_ids);
+    console.log({purchase});
+    if (purchase.error){
+        return res.status(500).send(purchase.error);
+    }
+    return res.status(200).send(purchase);
+});
+
 
 app.listen (PORT, ()=>{
     console.log(`Server running on port ${PORT}`);

@@ -199,21 +199,46 @@ export const TeckGeekDB = {
         return result.rows;
     },
     //会員情報を更新する
-    User: async (id, name, email, password) => {
+    updateUser: async (name, email, password, id) => {
+        try{
         const client = await TeckGeekDB.connect();
         const result = await client.query(
             `UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4 RETURNING *;`,
             [name, email, password, id]
         );
         return result.rows[0];
+        } catch(error){
+            console.log(error);
+            return {error: '不明なエラーが発生しました'}
+        }
     },
     //商品を更新する
-    updateProduct: async (id, title, description, price, imagePath) => {
+    updateProduct: async (title, description, price, imagePath, id) => {
+        try{
         const client = await TeckGeekDB.connect();
         const result = await client.query(
             `UPDATE products SET title = $1, description = $2, price = $3, image_path = $4 WHERE id = $5 RETURNING *;`,
             [title, description, price, imagePath, id]
         );
+        return result.rows[0] || {message:'商品が見つかりません'};
+        } catch(error){
+            console.log(error);
+            return {error: '不明なエラーが発生しました'}
+        }
+    },
+    //商品を購入する
+    purchaseProduct: async (user_id, amount, product_ids) => {
+        try{
+        const client = await TeckGeekDB.connect();
+        const result = await client.query(
+            `INSERT INTO purchases (user_id, amount, product_ids) VALUES ($1, $2, $3) RETURNING *;`,
+            [user_id, amount, JSON.stringify(product_ids)]
+        );
         return result.rows[0];
+        } catch(error){
+            console.log(error);
+            return {error: '不明なエラーが発生しました'}
+        }
     }
+
 }
