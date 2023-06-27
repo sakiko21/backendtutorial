@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/hashibasakiko/.nodebrew/node/v20.0.0/bin/node /Users/hashibasakiko/.nodebrew/current/bin/yarn add bcrypt.js
+  /Users/hashibasakiko/.nodebrew/node/v20.0.0/bin/node /Users/hashibasakiko/.nodebrew/current/bin/yarn add jswebtoken
 
 PATH: 
   /usr/local/pgsql/bin:/usr/local/pgsql/bin:/usr/local/pgsql/bin:/Users/hashibasakiko/.rbenv/shims:/Users/hashibasakiko/.rbenv/bin:/Users/hashibasakiko/.nodebrew/current/bin:/Users/hashibasakiko/.rbenv/shims:/Users/hashibasakiko/.rbenv/bin:/Users/hashibasakiko/.nodebrew/current/bin:/Users/hashibasakiko/.rbenv/shims:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/hashibasakiko/.rbenv/shims:/Users/hashibasakiko/.rbenv/bin:/Users/hashibasakiko/.nodebrew/current/bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/bcrypt.js: Not found
+  Error: https://registry.yarnpkg.com/jswebtoken: Not found
       at params.callback [as _callback] (/Users/hashibasakiko/.nodebrew/node/v20.0.0/lib/node_modules/yarn/lib/cli.js:66145:18)
       at self.callback (/Users/hashibasakiko/.nodebrew/node/v20.0.0/lib/node_modules/yarn/lib/cli.js:140890:22)
       at Request.emit (node:events:511:28)
@@ -37,6 +37,7 @@ npm manifest:
       "dev": "nodemon index.js"
     },
     "dependencies": {
+      "bcryptjs": "^2.4.3",
       "dotenv": "^16.2.0",
       "express": "^4.18.2",
       "pg": "^8.11.0"
@@ -84,6 +85,11 @@ Lockfile:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
     integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
+  
+  bcryptjs@^2.4.3:
+    version "2.4.3"
+    resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
+    integrity sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==
   
   binary-extensions@^2.0.0:
     version "2.2.0"

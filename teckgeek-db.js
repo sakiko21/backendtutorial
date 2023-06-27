@@ -126,10 +126,10 @@ export const TeckGeekDB = {
                     `SELECT * FROM users WHERE email = $1;`,
                     [email]
                 );
-                return result.rows[0] || {message:'ユーザーが見つかりません'};
+                return result.rows[0] ;
             } catch(error){
                 console.log(error);
-                return {error: '不明なエラーが発生しました'}
+                return { error: '不明なエラーが発生しました'}
             }
             },
             //IDでも取得できるように
@@ -188,7 +188,7 @@ export const TeckGeekDB = {
                     `INSERT INTO purchases (user_id, amount, product_ids) VALUES ($1, $2, $3) RETURNING *;`,
             [user_id, amount, product_ids]
         );
-        return result.rows[0]; // INSERT操作なので、作成した購入記録のデータを返すべきで、result.rows[0]を返すように修正しました。
+        return result.rows[0]; // INSERT操作なので、作成した購入記録のデータを返すべき
     },
     getPurchaseds: async (user_id) => {
         const client = await TeckGeekDB.connect();

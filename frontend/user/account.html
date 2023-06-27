@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mypage</title>
+    <Link rel="stylesheet" href ="../style.css">
+    
+</head>
+<body>
+    <p>マイページ画面</p>
+</body>
+
+<script>
+    // ページのロード時に実行する処理
+window.onload = function() {
+    // トークンをクッキーから取得する
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+    // トークンを使ってアカウントページへのリクエストを行う
+    fetch('/user/account', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        // レスポンスデータを使って何か処理を行う
+    })
+    .catch((err) => {
+        // エラーハンドリング
+    });
+
+};
+//ページが読み込まれたときに実行
+window.onload = function() {
+    fetch('/user/account')
+    .then((res) => {
+        if(res.status === 401){
+            // ユーザーがログインしていない場合、トップページにリダイレクト
+            window.location.href = '/';
+        } else {
+            // ユーザーがログインしている場合、その他の処理を行う（必要に応じて）
+        }
+    })
+    .catch((err) => {
+        console.error(err);
+    });
+};
+
+</script>
+
+
+</html>
