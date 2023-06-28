@@ -27,6 +27,7 @@ console.log("パスワード: " , password);
         // window.location.href = "/user/account";
         //user/accountを指定すると、APIのエンドポイントになってしまうので、account.htmlに遷移するようにする
         ///Users/hashibasakiko/backend/routes/user.jsの19~21行目を参照
+        
         window.location.href = "/user/account.html";
     }
 })

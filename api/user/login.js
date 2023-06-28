@@ -1,4 +1,4 @@
-import { TeckGeekDB } from '../../../teckgeek-db.js';
+import { TeckGeekDB } from '../../teckgeek-db.js';
 
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';

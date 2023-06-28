@@ -4,7 +4,7 @@ import {
     account,
     login,
     register
-} from "../middleware/api/user/index.js";
+} from "../api/user/index.js";
 
 import { userAuthentication } from "../middleware/index.js";
 
@@ -20,9 +20,9 @@ export function userRouter(app){
 //         res.sendFile(path.resolve('frontend/user/account.html'));
 // });
     
-app.get('/user/account.html', userAuthentication, function(req, res) {
-    res.sendFile(path.resolve('frontend/user/account.html'));
-});
+// app.get('/user/account.html', userAuthentication, function(req, res) {
+//     res.sendFile(path.resolve('frontend/user/account.html'));
+// });
 
 
 //     //会員情報を更新するAPI
@@ -39,3 +39,6 @@ app.get('/user/account.html', userAuthentication, function(req, res) {
 // });
 
 }
+
+
+

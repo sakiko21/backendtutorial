@@ -1,4 +1,4 @@
-import { TeckGeekDB } from '../../../teckgeek-db.js';
+import { TeckGeekDB } from '../../teckgeek-db.js';
 
 export async function product(req, res) {
 

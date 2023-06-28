@@ -232,7 +232,7 @@ export const TeckGeekDB = {
         const client = await TeckGeekDB.connect();
         const result = await client.query(
             `INSERT INTO purchases (user_id, amount, product_ids) VALUES ($1, $2, $3) RETURNING *;`,
-            [user_id, amount, JSON.stringify(product_ids)]
+            [user_id, amount, product_ids]
         );
         return result.rows[0];
         } catch(error){
