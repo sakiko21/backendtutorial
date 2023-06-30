@@ -18,6 +18,17 @@
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
 
+//URL表記以外の画像を表示させる方法を試したがうまくいかず断念
+// function productImage(imagePath){
+//     if (imagePath && imagePath.includes('http')) {
+//         return imagePath;
+//     } else{
+//         const localhost = 'http://localhost:3000';
+//         const afterAssetPath = imagePath.replace('Users/hashibasakiko/backend/frontend', '');
+        
+//         return localhost + afterAssetPath;
+//     }
+// }
         // 商品IDを元にAPIを呼び出して商品詳細を取得
     fetch('/api/product/' + productId)
         .then(response => response.json())

@@ -141,6 +141,7 @@ export const TeckGeekDB = {
                 );
                 return result.rows[0];
             },
+
             //商品を作成する
             createProduct: async (title, description, price, image_path) => {
                 try {
