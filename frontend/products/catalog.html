@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品一覧</title>
+</head>
+<body>
+    <div class="container">
+        <div id="product-list">
+        <!-- 商品一覧はこの中に追加される -->
+        </div>
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+
+        fetch('/products')
+        .then(response => response.json())
+        .then(products => {
+            // 商品一覧を表示するためのdiv要素を取得
+            const productList = document.getElementById('product-list');
+            
+            // 登録されている商品の数だけループを回す
+            products.forEach(product => {
+                
+                // 商品の情報を表示するためのdiv要素を作成
+                const productItem = document.createElement('div');
+                // 商品の情報を表示するためのdiv要素にproduct-itemクラスを追加
+                productItem.classList.add('product-item');
+                //div.product-itemの中身
+                productItem.innerHTML = `
+                    <a href="/product.html?id=${product.id}">${product.title}</a>
+                `;
+                
+                // 商品一覧のdiv要素の中に商品の情報を表示するためのdiv要素を追加
+                productList.appendChild(productItem);
+            });
+        })
+        .catch(err => console.error('エラーが発生:', err));
+    </script>
+</body>
+</html>

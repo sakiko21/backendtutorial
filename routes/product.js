@@ -1,12 +1,25 @@
 import {create, products, product} from "../api/product/index.js";
 import {userAuthentication} from "../middleware/index.js";
+import multer from "multer";
 import {TeckGeekDB} from "../teckgeek-db.js";
 export function productRouter(app){
+//multerの初期化
+const upload = multer({
+    storage: multer.diskStorage ({
+    //ファイルの保存先を指定する
+    destination: function(req, file, cb){
+        cb(null, 'frontend/assets/images/'); 
+    },
+    //ファイル名を指定する
+    filename: function(req, file, cb){
+        cb(null, file.originalname);
+    }
+})
+});
 
-
-    app.post("/product/create", userAuthentication, create);
+    app.post("/product/create", userAuthentication, upload.single("product_image"), create);
     app.get("/products", products);
-    app.get("/product/:id", product);
+    app.get("/api/product/:id", product);
 // //商品情報を更新するAPI
 // app.put("/product/update", async (req, res) => {
 //     const {title, description, price, imagePath, id} = req.body;
@@ -30,6 +43,12 @@ app.post("/purchase/create", async (req, res) => {
     }
     return res.status(200).send(purchase);
 });
+
+// app.get("/products/product.html", (req, res) => {
+//     // ファイルを読み込んで表示させる
+//     const contentHtml = readFileSync(STATIC_PATH + "/products/product.html", "utf8");
+//     res.status(200).setHeader("Content-Type", "text/html").send(contentHtml);
+// });
 
 
 }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品詳細ページ</title>
+</head>
+<body>
+    <div class="container">
+        <div id="product-detail">
+        <!-- 商品詳細ページ -->
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+  // URLから商品IDを取得
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+
+        // 商品IDを元にAPIを呼び出して商品詳細を取得
+    fetch('/api/product/' + productId)
+        .then(response => response.json())
+        .then(product => {
+
+            // 商品一覧を表示するためのdiv要素を取得
+            const productDetail = document.getElementById('product-detail');
+                //中身
+                productDetail.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image_path}" alt="${product.title}">
+                    </div>
+                    <div class="product-info">
+                        <h2>${product.title}</h2>
+                        <p>${product.description}</p>
+                        <p>${product.price}</p>
+                    </div>
+                `;
+        })
+        .catch(err => console.error('エラーが発生:', err));
+}
+
+
+
+
+        // fetch(`/product/${product.id}`)
+        // .then(response => response.json())
+        // .then(product => {
+        //     // 商品一覧を表示するためのdiv要素を取得
+        //     const productDetail = document.getElementById('product-detail');
+
+                
+        //         // 商品の情報を表示するためのdiv要素を作成
+        //         const productItem = document.createElement('div');
+        //         // 商品の情報を表示するためのdiv要素にproduct-itemクラスを追加
+        //         productItem.classList.add('product-item');
+        //         //div.product-itemの中身
+        //         productItem.innerHTML = `
+        //             <div class="product-image">
+        //                 <img src="${product.image_path}" alt="${product.title}">
+        //             </div>
+        //             <div class="product-info">
+        //                 <h2>${product.title}</h2>
+        //                 <p>${product.description}</p>
+        //                 <p>${product.price}</p>
+        //             </div>
+        //         `;
+                
+        //         // 商品一覧のdiv要素の中に商品の情報を表示するためのdiv要素を追加
+        //         productList.appendChild(productItem);
+        // })
+        // .catch(err => console.error('エラーが発生:', err));
+    </script>
+</body>
+</html>

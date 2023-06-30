@@ -26,52 +26,60 @@ import serveStatic from "serve-static";
 import {readFileSync} from "fs";
 import {join} from "path";
 import cookieParser from "cookie-parser";
+//urlをパースするためのモジュール
+import {parse as urlParse} from "url";
 
 
 const app = express();
 const PORT = 3000;
 
+const STATIC_PATH = `${process.cwd()}/frontend`;//process.cwdでルートディレクトリへのパスを作る.ルートディレクトリから見てfrontendディレクトリを指定
+
 app.use (express.json());
 app.use (cookieParser());
 userRouter(app);
-productRouter(app);
+productRouter(app, STATIC_PATH);
 
-const STATIC_PATH = `${process.cwd()}/frontend`;//process.cwdでルートディレクトリへのパスを作る.ルートディレクトリから見てfrontendディレクトリを指定
 //Viewファイルを出すためのルーティングをかく
 app.use(serveStatic(STATIC_PATH,{index: ["index.html"]}));
 
-app.get("/*",  (req, res)=>{
-    console.log(STATIC_PATH + req.originalUrl + ".html");
-    const contentHtml = readFileSync(STATIC_PATH + req.originalUrl + ".html", "utf8");
+// //元のコード。これだと商品一覧から商品詳細ページに遷移するときのURLがlocalhost:3000/product/1のようになる　一旦コメントアウト　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+// app.get("/*",  (req, res)=>{
+//     console.log(STATIC_PATH + req.originalUrl + ".html");
+//     const contentHtml = readFileSync(STATIC_PATH + req.originalUrl + ".html", "utf8");
+//     res
+//     .status(200)
+//     .setHeader("Content-Type", "text/html")
+//     .send(contentHtml);
+// });
+
+
+//
+app.get("/*",  (req, res, next)=>{
+    // parse the url, ignoring query parameters
+    const url = urlParse(req.originalUrl);
+    let path = STATIC_PATH;
+//ルーティングとエンドポイントが混在しているため、うまくいかないらしい
+//URLが/api/から始まる場合は、HTML読み込みをスキップする
+    if (url.pathname.startsWith('/api/')) {
+        return next();
+    }
+
+    if (url.pathname === "/product.html") {
+        path += '/products' + url.pathname;
+    } else {
+        path += url.pathname;
+    }
+    console.log(path);
+    const contentHtml = readFileSync(path, "utf8");
     res
     .status(200)
     .setHeader("Content-Type", "text/html")
     .send(contentHtml);
 });
-//pathname: '/',path: '/',href: '/',_raw: '/' となるのを全て/user/newになるように修正するべきファイルを探す
-//app.get("/user/new",  (req, res)=>{
 
 
 
-
-//もしreadFileSyncを使用しない場合どうなるか。
-// app.get("/", async (req, res)=>{
-//     const contentHtml = await fs.readFile(STATIC_PATH + "index.html", "utf8");
-//     res
-//     .status(200)
-//     .setHeader("Content-Type", "text/html")
-//     .send("Hello World");
-// }
-// );
-
-// app.get("/user/new",  (req, res)=>{
-//     const contentHtml = readFileSync(STATIC_PATH + "/user/new.html", "utf8");
-//     res
-//     .status(200)
-//     .setHeader("Content-Type", "text/html")
-//     .send(contentHtml);
-// }
-//);
 
 
 
