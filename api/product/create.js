@@ -7,7 +7,15 @@ export async function create(req, res) {
         //トークンを検証する(トークン、秘密鍵(JWT_SECRET)があれば検証できる、)
         //認証機能は別のファイルに書く
         console.log("user:", req.user);
-        const image_path = req.file.path;
+        //画像のパスを取得する
+        const isProduction = process.env.NODE_ENV === "production";
+        let image_path;
+        if (isProduction){
+            image_path = req.file.location;
+        } else {
+            image_path = req.file.path;
+        }
+
         console.log("file:", req.file);
         const product = await TeckGeekDB.createProduct(
             title, 
