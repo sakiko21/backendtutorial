@@ -1,0 +1,24 @@
+# fly.toml app configuration file generated for sakiko-tutorial2 on 2023-07-04T09:30:18+09:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "sakiko-tutorial2"
+primary_region = "nrt"
+
+[env]
+  AWS_ACCESS_KEY_ID = "AKIAT57GYAXMSGFOA75E"
+  AWS_BUCKET_NAME = "hashiba-tutrial"
+  AWS_REGION = "ap-northeast-1"
+  AWS_SECRET_ACCESS_KEY = "XS3XQLnZhkJ3gzoXjXhj0/y5aeJHsp8p9RgIgtBO"
+  DATABASE_URL = "postgres://sakiko_tutorial2:Kk0VqyjsAIFFoXg@sakiko-tutorial2-db.flycast:5432/sakiko_tutorial2?sslmode=disable"
+  JWT_SECRET = "secret"
+  PORT = "8080"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]

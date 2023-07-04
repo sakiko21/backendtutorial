@@ -29,7 +29,7 @@ export async function create(req, res) {
             return res.status(500).send(product.error);
         }
         
-        return res.status(200).send(product);
+        return res.status(200).json(product);
         
         
     }

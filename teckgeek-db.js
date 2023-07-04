@@ -21,7 +21,7 @@ export const TeckGeekDB = {
         //どのポストグレスに接続するかを決める
         const client = new pg.Pool({
             connectionString:process.env.DATABASE_URL,
-            ssl: false
+            ssl: true
         });
         //接続を時効します、というコネクト関数
         await client.connect();

@@ -21,6 +21,6 @@ export async function register(req, res){
         secure: process.env.NODE_ENV === 'production', //本番環境ではhttpsでアクセスさせたいので、trueにすることでhttpsでアクセスした時のみクッキーを発行する
         maxAge: 60 * 60 * 24 * 1000,//有効期限を1日にする
         })
-    return res.status(200).send(token);
+    return res.status(200).json(token);
 
 }

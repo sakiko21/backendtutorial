@@ -31,7 +31,8 @@ import {parse as urlParse} from "url";
 
 
 const app = express();
-const PORT = 3000;
+// const PORT = 3000;
+const PORT = process.env.PORT;
 
 const STATIC_PATH = `${process.cwd()}/frontend`;//process.cwdでルートディレクトリへのパスを作る.ルートディレクトリから見てfrontendディレクトリを指定
 
@@ -80,10 +81,12 @@ app.get("/*",  (req, res, next)=>{
 
 
 
+// app.listen (PORT, ()=>{
+//     console.log(`Server running on port ${PORT}`);
 
+// });
 
-
-app.listen (PORT, ()=>{
-    console.log(`Server running on port ${PORT}`);
+app.listen (process.env.PORT, ()=>{
+    console.log(`Server running on port ${process.env.PORT}`);
 
 });
